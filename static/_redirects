@@ -1,0 +1,5 @@
+# Netlify serves any matching prerendered file first (all the archive
+# pages, the home page, etc). Only paths with no matching static file —
+# /play/daily and /play/unlimited, which are client-rendered on purpose,
+# see the comments in their +page.ts files — fall through to the SPA shell.
+/*  /200.html  200

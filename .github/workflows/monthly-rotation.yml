@@ -1,0 +1,35 @@
+name: Monthly art rotation
+
+on:
+  schedule:
+    # 00:10 UTC on the 1st of every month. A few minutes after midnight so
+    # the previous day's UTC daily has already been served; a brief gap
+    # while this job runs is fine since the site falls back to a reshuffled
+    # archive pick for any date it doesn't have a pre-assigned set for.
+    - cron: '10 0 1 * *'
+  workflow_dispatch: {} # allow running it manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  rotate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Rotate art pool
+        run: node scripts/rotate-monthly.mjs
+
+      - name: Commit and push
+        run: |
+          git config user.name "chronocanvas-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add src/lib/data/archive.json src/lib/data/current-month.json
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Monthly art rotation: $(date -u +%Y-%m)"
+          git push

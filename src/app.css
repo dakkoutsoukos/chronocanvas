@@ -1,0 +1,128 @@
+@import 'tailwindcss';
+
+@theme {
+	--font-display: 'Fraunces', ui-serif, Georgia, serif;
+	--font-sans: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
+
+	/* Gallery wall, not tech-blue. Warm parchment + two pigments pulled
+	   straight off a painter's palette (terracotta / ultramarine). */
+	--color-canvas: #f3ece1;
+	--color-canvas-soft: #ebe1d2;
+	--color-ink: #2a2420;
+	--color-ink-soft: #5b5147;
+
+	--color-terracotta: #c1502d;
+	--color-terracotta-dark: #9c3f22;
+	--color-terracotta-soft: #e8c2ac;
+
+	--color-ultramarine: #33517a;
+	--color-ultramarine-dark: #24395a;
+	--color-ultramarine-soft: #c3d0e2;
+
+	--color-canvas-dark: #1c1815;
+	--color-canvas-dark-soft: #262019;
+	--color-ink-dark: #efe7da;
+	--color-ink-dark-soft: #b6ab9b;
+}
+
+:root {
+	color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+	color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		color-scheme: dark;
+	}
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	background: var(--color-canvas);
+	color: var(--color-ink);
+	font-family: var(--font-sans);
+}
+
+:root[data-theme='dark'] body {
+	background: var(--color-canvas-dark);
+	color: var(--color-ink-dark);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) body {
+		background: var(--color-canvas-dark);
+		color: var(--color-ink-dark);
+	}
+}
+
+.font-display {
+	font-family: var(--font-display);
+}
+
+/* Range slider (year picker) — big, tactile, terracotta thumb */
+input[type='range'].year-slider {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 100%;
+	height: 10px;
+	border-radius: 999px;
+	background: linear-gradient(
+		to right,
+		var(--color-terracotta) 0%,
+		var(--color-terracotta) var(--fill, 50%),
+		var(--color-terracotta-soft) var(--fill, 50%),
+		var(--color-terracotta-soft) 100%
+	);
+	outline: none;
+}
+
+:root[data-theme='dark'] input[type='range'].year-slider {
+	background: linear-gradient(
+		to right,
+		var(--color-terracotta) 0%,
+		var(--color-terracotta) var(--fill, 50%),
+		#4a3f34 var(--fill, 50%),
+		#4a3f34 100%
+	);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) input[type='range'].year-slider {
+		background: linear-gradient(
+			to right,
+			var(--color-terracotta) 0%,
+			var(--color-terracotta) var(--fill, 50%),
+			#4a3f34 var(--fill, 50%),
+			#4a3f34 100%
+		);
+	}
+}
+
+input[type='range'].year-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	background: var(--color-terracotta-dark);
+	border: 3px solid var(--color-canvas);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+	cursor: pointer;
+}
+
+input[type='range'].year-slider::-moz-range-thumb {
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	background: var(--color-terracotta-dark);
+	border: 3px solid var(--color-canvas);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+	cursor: pointer;
+}
