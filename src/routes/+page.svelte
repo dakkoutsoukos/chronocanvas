@@ -18,6 +18,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Chronocanvas — Daily Art History Guessing Game</title>
+</svelte:head>
+
 <div class="mx-auto flex max-w-2xl flex-col items-center gap-8 text-center">
 	<div>
 		<h1 class="font-display text-5xl font-semibold sm:text-6xl">
