@@ -7,7 +7,7 @@ on:
     # while this job runs is fine since the site falls back to a reshuffled
     # archive pick for any date it doesn't have a pre-assigned set for.
     - cron: '10 0 1 * *'
-  workflow_dispatch: {} # allow running it manually from the Actions tab
+  workflow_dispatch: {} # allow running it manually from the Actions tab.
 
 permissions:
   contents: write
